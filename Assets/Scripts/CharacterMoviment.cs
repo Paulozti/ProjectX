@@ -20,13 +20,14 @@ public class CharacterMoviment : MonoBehaviour
 
     private Rigidbody2D player_rg;
     private string jump = "", fire = "", dash = "", horizontal = "";
+    private bool isGrounded = true;
     
 
     void Start()
     {
         setControls();
         player_rg = GetComponent<Rigidbody2D>();
-        checkNull(player_rg);
+        GameController.checkNull(player_rg, gameObject); //Verificando se foi possivel pegar o componente, caso não, emitir um erro
     }
 
     void Update()
@@ -98,7 +99,7 @@ public class CharacterMoviment : MonoBehaviour
                 if (player_rg.velocity.x > 0)
                 {
                     player_rg.velocity = new Vector2(player_rg.velocity.x - stopForce, player_rg.velocity.y);
-                    if (player_rg.velocity.x < 0) // caso a redução tenha sido o suficiente para inverter o eixo X, pare o personagem.
+                    if (player_rg.velocity.x < 0) // caso a redução tenha sido o suficiente para inverter o eixo X, pare o personagem. Mantenha velocidade y.
                         player_rg.velocity = new Vector2(0, player_rg.velocity.y);
                 }
                 else
@@ -114,17 +115,24 @@ public class CharacterMoviment : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown(jump))
+        if (Input.GetButtonDown(jump) && isGrounded)
         {
             player_rg.AddForce(new Vector2(0, jumpForce));
         }
     }
 
-    private void checkNull<T>(T obj) // Método para verificar se o objeto passado é nulo, o objeto passado pode ser de qualquer tipo, é um metodo genérico.
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(obj == null)
+        if (collision.CompareTag("Ground"))
         {
-            Debug.LogError(obj.ToString() + " está nulo em " + selectedPlayer.ToString()); // Causa um erro caso o objeto esteja nulo e identifica de qual player vem o erro.
+            isGrounded = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ground"))
+        {
+            isGrounded = false;
         }
     }
 }
