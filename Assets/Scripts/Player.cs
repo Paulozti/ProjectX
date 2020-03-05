@@ -19,10 +19,10 @@ public class Player : MonoBehaviour
     public int moveSpeed = 3000;
     public int maxSpeed = 4;
     public float stopForce = 0.5f;
-    public int jumpForce = 500;
-    public int dashForce = 1500;
+    public int jumpForce = 100;
+    public int dashForce = 800;
     public int dashMaxSpeed = 8;
-    public float dashTime = 0.005f;
+    public float dashTime = 0.1f;
     
 
     private Rigidbody2D player_rg;
