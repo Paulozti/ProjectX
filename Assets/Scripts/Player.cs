@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-public class CharacterMoviment : MonoBehaviour
+public class Player : MonoBehaviour
 {
     
     public enum SelectedPlayer
@@ -10,29 +11,39 @@ public class CharacterMoviment : MonoBehaviour
         Player3,
         Player4
     };
-
     public SelectedPlayer selectedPlayer;
+
+    public delegate void ManaUse();
+    public static event ManaUse OnManaUse;
+
     public int moveSpeed = 3000;
     public int maxSpeed = 4;
     public float stopForce = 0.5f;
     public int jumpForce = 500;
+    public int dashForce = 1500;
+    public int dashMaxSpeed = 8;
+    public float dashTime = 0.005f;
     
 
     private Rigidbody2D player_rg;
-    private string jump = "", fire = "", dash = "", horizontal = "";
+    private string jump = "", fire = "", dash = "", horizontal = "", vertical = "";
     private bool isGrounded = true;
+    private bool canDash = true;
+    private bool dashing = false;
     
 
     void Start()
     {
         setControls();
         player_rg = GetComponent<Rigidbody2D>();
-        GameController.checkNull(player_rg, gameObject); //Verificando se foi possivel pegar o componente, caso não, emitir um erro
+        ManaBar.OnManaFull += DashUnlock;
+        GameController.checkNull(player_rg, "Player RigidBody", gameObject); //Verificando se foi possivel pegar o componente, caso não, emitir um erro
     }
 
     void Update()
     {
         Jump();
+        Dash();
     }
 
     private void FixedUpdate()
@@ -49,24 +60,28 @@ public class CharacterMoviment : MonoBehaviour
                 fire = "Fire1";
                 dash = "Dash";
                 horizontal = "Horizontal";
+                vertical = "Vertical";
                 break;
             case SelectedPlayer.Player2:
                 jump = "Jump2";
                 fire = "Fire2";
                 dash = "Dash2";
                 horizontal = "Horizontal2";
+                vertical = "Vertical2";
                 break;
             case SelectedPlayer.Player3:
                 jump = "Jump3";
                 fire = "Fire3";
                 dash = "Dash3";
                 horizontal = "Horizontal3";
+                vertical = "Vertical3";
                 break;
             case SelectedPlayer.Player4:
                 jump = "Jump4";
                 fire = "Fire4";
                 dash = "Dash4";
                 horizontal = "Horizontal4";
+                vertical = "Vertical4";
                 break;
         }
     }
@@ -84,12 +99,27 @@ public class CharacterMoviment : MonoBehaviour
             //Adicionando força de movimento
             player_rg.AddForce(new Vector2(direction, 0) * moveSpeed * Time.deltaTime);
 
-            //Controle de velocidade
+            int max; // uma variavel temporaria que vai armazenar a velocidade maxima atual
 
-            if (player_rg.velocity.x > maxSpeed) // Se o eixo X estiver acima da velocidade limite, a velocidade agora é a velocidade limite.
-                player_rg.velocity = new Vector2(maxSpeed, player_rg.velocity.y);
-            if (player_rg.velocity.x < maxSpeed*-1)
-                player_rg.velocity = new Vector2(maxSpeed*-1, player_rg.velocity.y);
+            if (dashing)
+                max = dashMaxSpeed; // esta realizando dash, velocidade maxima maior
+            else
+                max = maxSpeed;  // não esta em dash, velocidade maxima menor
+
+            //Controle de velocidade maxima
+
+            if (player_rg.velocity.x > max) // Se o eixo X estiver acima da velocidade limite, a velocidade agora é a velocidade limite.
+                player_rg.velocity = new Vector2(max, player_rg.velocity.y);
+            if (player_rg.velocity.x < max * -1)// Se o eixo X estiver abaixo da velocidade limite * -1 (mesma velocidade só que negativa), a velocidade agora é a velocidade limite * -1.
+                player_rg.velocity = new Vector2(max * -1, player_rg.velocity.y);
+            if (dashing)
+            {
+                if (player_rg.velocity.y > max)
+                    player_rg.velocity = new Vector2(player_rg.velocity.x, max);
+                if (player_rg.velocity.y < max * -1)
+                    player_rg.velocity = new Vector2(player_rg.velocity.x, max * -1);
+            }
+            
         }   
         else
         {
@@ -110,7 +140,6 @@ public class CharacterMoviment : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Velocity: " + player_rg.velocity.x.ToString());
     }
 
     private void Jump()
@@ -118,6 +147,37 @@ public class CharacterMoviment : MonoBehaviour
         if (Input.GetButtonDown(jump) && isGrounded)
         {
             player_rg.AddForce(new Vector2(0, jumpForce));
+        }
+    }
+
+    private void Dash()
+    {
+        if(Input.GetButtonDown(dash) && !isGrounded && canDash && (Input.GetAxisRaw(horizontal) != 0 || Input.GetAxisRaw(vertical) != 0)) 
+        {
+            player_rg.velocity = new Vector2(0,0);
+            Vector2 direction = new Vector2(Input.GetAxisRaw(horizontal) * dashForce, Input.GetAxisRaw(vertical) * dashForce);
+            Debug.Log(direction);
+            player_rg.AddForce(direction);
+            Debug.Log(player_rg.velocity);
+            canDash = false;
+            dashing = true;
+            StartCoroutine("StopDashing");
+            OnManaUse?.Invoke();
+        }
+    }
+
+    public void DashUnlock()
+    {
+        canDash = true;
+    }
+
+    IEnumerator StopDashing() // Coroutine que vai parar o dash depois do dashTime estabelecido
+    {
+        while (dashing)
+        {
+            yield return new WaitForSeconds(dashTime);
+            dashing = false;
+            player_rg.velocity = new Vector2(0, 0);
         }
     }
 
@@ -134,5 +194,12 @@ public class CharacterMoviment : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+    
+
+
+    private void OnDestroy()
+    {
+        ManaBar.OnManaFull -= DashUnlock;
     }
 }
