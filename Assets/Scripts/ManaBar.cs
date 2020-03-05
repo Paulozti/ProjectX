@@ -17,7 +17,7 @@ public class ManaBar : MonoBehaviour
     {
         GameController.checkNull(bar, "Image Bar",  gameObject);
         mana = 100;
-        CharacterMoviment.OnManaUse += UseMana;
+        Player.OnManaUse += UseMana;
     }
     private void Update()
     {
@@ -55,6 +55,6 @@ public class ManaBar : MonoBehaviour
 
     private void OnDestroy()
     {
-        CharacterMoviment.OnManaUse -= UseMana;
+        Player.OnManaUse -= UseMana;
     }
 }

@@ -290,6 +290,7 @@ GameObject:
   - component: {fileID: 705653944}
   - component: {fileID: 705653948}
   - component: {fileID: 705653949}
+  - component: {fileID: 705653950}
   m_Layer: 0
   m_Name: stickfigure
   m_TagString: Untagged
@@ -453,6 +454,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.190284, y: 2.0478134}
   m_EdgeRadius: 0
+--- !u!114 &705653950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705653943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8acf1afb21a35c94fb07aa4fc3a6ce01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedPlayer: 0
+  moveSpeed: 3000
+  maxSpeed: 4
+  stopForce: 0.5
+  jumpForce: 100
+  dashForce: 800
+  dashMaxSpeed: 8
+  dashTime: 0.1
 --- !u!1 &787988126
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,5 +911,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 787988128}
-  refillAmountPerSecond: 1
+  refillAmountPerSecond: 2
   dashCost: 100
