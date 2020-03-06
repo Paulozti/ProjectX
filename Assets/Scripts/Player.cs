@@ -19,9 +19,9 @@ public class Player : MonoBehaviour
     public int moveSpeed = 3000;
     public int maxSpeed = 4;
     public float stopForce = 0.5f;
-    public int jumpForce = 100;
-    public int dashForce = 800;
-    public int dashMaxSpeed = 8;
+    public int jumpForce = 500;
+    public int dashForce = 900;
+    public int dashMaxSpeed = 18;
     public float dashTime = 0.1f;
     
 
@@ -30,13 +30,15 @@ public class Player : MonoBehaviour
     private bool isGrounded = true;
     private bool canDash = true;
     private bool dashing = false;
-    
+    private Vector2 direction;
+
+
 
     void Start()
     {
         setControls();
         player_rg = GetComponent<Rigidbody2D>();
-        ManaBar.OnManaFull += DashUnlock;
+        //ManaBar.OnManaFull += DashUnlock;
         GameController.checkNull(player_rg, "Player RigidBody", gameObject); //Verificando se foi possivel pegar o componente, caso não, emitir um erro
     }
 
@@ -155,29 +157,30 @@ public class Player : MonoBehaviour
         if(Input.GetButtonDown(dash) && !isGrounded && canDash && (Input.GetAxisRaw(horizontal) != 0 || Input.GetAxisRaw(vertical) != 0)) 
         {
             player_rg.velocity = new Vector2(0,0);
-            Vector2 direction = new Vector2(Input.GetAxisRaw(horizontal) * dashForce, Input.GetAxisRaw(vertical) * dashForce);
-            Debug.Log(direction);
+            direction = new Vector2(Input.GetAxisRaw(horizontal) * dashForce, Input.GetAxisRaw(vertical) * dashForce);
             player_rg.AddForce(direction);
-            Debug.Log(player_rg.velocity);
             canDash = false;
             dashing = true;
+            player_rg.gravityScale = 0;
             StartCoroutine("StopDashing");
-            OnManaUse?.Invoke();
+            //OnManaUse?.Invoke();
         }
     }
 
-    public void DashUnlock()
+    /*public void DashUnlock()
     {
         canDash = true;
-    }
+    }*/
 
     IEnumerator StopDashing() // Coroutine que vai parar o dash depois do dashTime estabelecido
     {
         while (dashing)
         {
+            yield return new WaitForSeconds(dashTime/2);
+            player_rg.AddForce((direction*-1)/2);
             yield return new WaitForSeconds(dashTime);
             dashing = false;
-            player_rg.velocity = new Vector2(0, 0);
+            player_rg.gravityScale = 2;
         }
     }
 
@@ -186,6 +189,7 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("Ground"))
         {
             isGrounded = true;
+            canDash = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -200,6 +204,6 @@ public class Player : MonoBehaviour
 
     private void OnDestroy()
     {
-        ManaBar.OnManaFull -= DashUnlock;
+        //ManaBar.OnManaFull -= DashUnlock;
     }
 }

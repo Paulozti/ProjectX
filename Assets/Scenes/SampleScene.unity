@@ -246,7 +246,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.64
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -290,7 +290,6 @@ GameObject:
   - component: {fileID: 705653944}
   - component: {fileID: 705653948}
   - component: {fileID: 705653949}
-  - component: {fileID: 705653950}
   m_Layer: 0
   m_Name: stickfigure
   m_TagString: Untagged
@@ -404,7 +403,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.37, y: 0.83, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_Children: []
+  m_Children:
+  - {fileID: 915159486}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -425,8 +425,8 @@ MonoBehaviour:
   maxSpeed: 4
   stopForce: 0.5
   jumpForce: 500
-  dashForce: 800
-  dashMaxSpeed: 12
+  dashForce: 900
+  dashMaxSpeed: 18
   dashTime: 0.1
 --- !u!61 &705653949
 BoxCollider2D:
@@ -454,26 +454,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.190284, y: 2.0478134}
   m_EdgeRadius: 0
---- !u!114 &705653950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705653943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8acf1afb21a35c94fb07aa4fc3a6ce01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedPlayer: 0
-  moveSpeed: 3000
-  maxSpeed: 4
-  stopForce: 0.5
-  jumpForce: 100
-  dashForce: 800
-  dashMaxSpeed: 8
-  dashTime: 0.1
 --- !u!1 &787988126
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,8 +594,8 @@ Canvas:
   m_GameObject: {fileID: 915159482}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 2
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -623,7 +603,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1770713485
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &915159486
@@ -633,19 +613,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915159482}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_Children:
   - {fileID: 2055239819}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 705653947}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -7}
+  m_SizeDelta: {x: 152.12, y: 23.66}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1037806381
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,7 +690,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1713789241
 PrefabInstance:
@@ -762,7 +742,7 @@ PrefabInstance:
     - target: {fileID: 8258093780955102664, guid: 784f7629ac08ada4c806393e0c36f7e6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8258093780955102664, guid: 784f7629ac08ada4c806393e0c36f7e6,
         type: 3}
@@ -895,7 +875,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -47.56}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 4.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2055239820
@@ -910,6 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1532628f809e7c44293847dee8ac97c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerToFollow: {fileID: 705653943}
   bar: {fileID: 787988128}
   refillAmountPerSecond: 2
   dashCost: 100

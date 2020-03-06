@@ -22,7 +22,6 @@ public class ManaBar : MonoBehaviour
     private void Update()
     {
         bar.fillAmount = mana/100;
-        
     }
 
     public void UseMana()
