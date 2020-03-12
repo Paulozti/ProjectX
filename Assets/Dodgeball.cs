@@ -7,7 +7,7 @@ public class Dodgeball : MonoBehaviour
     public float speed = 20f;
     public int damage = 1;
     public Rigidbody2D force;
-    public Gameobject hitEffect;
+    
 
 
     // Start is called before the first frame update
@@ -22,7 +22,11 @@ public class Dodgeball : MonoBehaviour
         Debug.Log("Batata");
                       
         {
-             GameObject Instantiate(hitEffect, transform.position, Quarternion.identity);
+            hitInfo.GameObject<player1>;
+            if (player1 != null)
+            {
+                player1.TakeDamage();
+            }
                
         }
 
