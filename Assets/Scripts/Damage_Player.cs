@@ -19,7 +19,7 @@ public class Damage_Player : MonoBehaviour
 
     void Die()
     {
-        Instantiate(death, transform.position, Player1.tag);
+        
         Destroy(gameObject);
     }
 }
