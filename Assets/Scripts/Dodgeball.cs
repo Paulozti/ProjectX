@@ -28,6 +28,7 @@ public class Dodgeball : MonoBehaviour
                 if (player1 != null)
                 {
                     player1.TakeDamage(damage);
+                    Destroy(gameObject);
                 }
 
             }
@@ -35,5 +36,6 @@ public class Dodgeball : MonoBehaviour
         }
 
     }
-}
+
+    }
 
