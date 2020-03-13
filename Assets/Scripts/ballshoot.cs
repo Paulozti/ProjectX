@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ballshoot : MonoBehaviour
 {
-    public Transform FirePoint;
+    public Transform firePoint;
     public GameObject bulletPrefab;
+    public int damage = 1;
 
     // Update is called once per frame
     void Update()
@@ -18,6 +19,6 @@ public class ballshoot : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation);
+        
     }
 }

@@ -292,7 +292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7733675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.896, y: 0.802, z: 0}
+  m_LocalPosition: {x: 3.45, y: -0.45, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 1200898917}
@@ -311,6 +311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3570a904e4af8354dbf1b6ec33c74e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
+  death: {fileID: 7733675}
 --- !u!1 &411821536
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +538,7 @@ GameObject:
   - component: {fileID: 705653948}
   - component: {fileID: 705653949}
   - component: {fileID: 705653950}
+  - component: {fileID: 705653951}
   m_Layer: 0
   m_Name: stickfigure
   m_TagString: Player1
@@ -647,7 +650,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705653943}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.37, y: 0.83, z: 0}
+  m_LocalPosition: {x: -2.0759997, y: -0.422, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 915159486}
@@ -716,6 +719,20 @@ MonoBehaviour:
   FirePoint: {fileID: 1121939233}
   bulletPrefab: {fileID: 8440652349253462401, guid: b3294db47448e2e4d8b74ce9e3093390,
     type: 3}
+--- !u!114 &705653951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705653943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3570a904e4af8354dbf1b6ec33c74e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  death: {fileID: 705653943}
 --- !u!1 &787988126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,7 +1540,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030245438}
   m_LocalRotation: {x: 0, y: 0, z: -0.9571327, w: 0.28965}
-  m_LocalPosition: {x: 2.431, y: 0.746, z: 0}
+  m_LocalPosition: {x: -1.0149999, y: -0.506, z: 0}
   m_LocalScale: {x: 0.23659636, y: 0.23659636, z: 0.23659636}
   m_Children: []
   m_Father: {fileID: 0}

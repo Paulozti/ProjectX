@@ -31,6 +31,9 @@ public class Player : MonoBehaviour
     private bool canDash = true;
     private bool dashing = false;
     private Vector2 direction;
+    public int health = 3;
+
+    public GameObject death;
 
 
 
@@ -199,11 +202,24 @@ public class Player : MonoBehaviour
             isGrounded = false;
         }
     }
-    
-
-
     private void OnDestroy()
     {
         //ManaBar.OnManaFull -= DashUnlock;
     }
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+
+        Destroy(gameObject);
+    }
 }
+
+
+

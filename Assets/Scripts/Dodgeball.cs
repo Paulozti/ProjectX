@@ -7,7 +7,7 @@ public class Dodgeball : MonoBehaviour
     public float speed = 20f;
     public int damage = 1;
     public Rigidbody2D force;
-    
+
 
 
     // Start is called before the first frame update
@@ -16,20 +16,24 @@ public class Dodgeball : MonoBehaviour
         force.velocity = transform.right * speed;
     }
 
-    void OnCollisionEnter2D(Collision2D hitInfo)
+    void OnColliderEnter2D(Collision2D hitInfo)
     {
 
         Debug.Log("Batata");
-                      
+
         {
-            hitInfo.GameObject<player1>;
+            if (hitInfo.gameObject.CompareTag("Player1"))
+            {
+            Player player1 = hitInfo.gameObject.GetComponent<Player>();
             if (player1 != null)
             {
-                player1.TakeDamage();
+                player1.TakeDamage(damage);
             }
-               
+
+            }
+
         }
 
     }
- }
-    
+}
+
