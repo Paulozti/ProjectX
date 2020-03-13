@@ -16,19 +16,19 @@ public class Dodgeball : MonoBehaviour
         force.velocity = transform.right * speed;
     }
 
-    void OnColliderEnter2D(Collision2D hitInfo)
+    void OnTriggerEnter2D(Collider2D hitInfo)
     {
 
-        Debug.Log("Batata");
+
 
         {
             if (hitInfo.gameObject.CompareTag("Player1"))
             {
-            Player player1 = hitInfo.gameObject.GetComponent<Player>();
-            if (player1 != null)
-            {
-                player1.TakeDamage(damage);
-            }
+                Player player1 = hitInfo.gameObject.GetComponent<Player>();
+                if (player1 != null)
+                {
+                    player1.TakeDamage(damage);
+                }
 
             }
 

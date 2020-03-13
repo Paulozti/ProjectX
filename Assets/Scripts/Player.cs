@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     private bool canDash = true;
     private bool dashing = false;
     private Vector2 direction;
-    public int health = 3;
+    public int health;
 
     public GameObject death;
 

@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ballshoot : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
-    public Transform firePoint;
+    public Transform FirePoint;
     public GameObject bulletPrefab;
     public int damage = 1;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire3"))
         {
-            Shoot();       
+            Shoot();
         }
     }
 
     void Shoot()
     {
-        
+        Instantiate(bulletPrefab, FirePoint.position, FirePoint.rotation);
     }
 }
