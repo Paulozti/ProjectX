@@ -1215,6 +1215,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8258093780955102666, guid: 784f7629ac08ada4c806393e0c36f7e6,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8258093780955102669, guid: 784f7629ac08ada4c806393e0c36f7e6,
         type: 3}
       propertyPath: m_Name
