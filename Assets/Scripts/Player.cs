@@ -32,12 +32,14 @@ public class Player : MonoBehaviour
     private bool canDash = true;
     private bool dashing = false;
     private Vector2 direction;
-
+    private GameController.Characters selectedCharacter;
 
 
     void Start()
     {
         setControls();
+        CharacterAnimator characterAnimator = new CharacterAnimator();
+        chsaracterAnimator.SetCharacter(selectedCharacter); // erro proposital, receber o character
         player_rg = GetComponent<Rigidbody2D>();
         //ManaBar.OnManaFull += DashUnlock;
         GameController.checkNull(player_rg, "Player RigidBody", gameObject); //Verificando se foi possivel pegar o componente, caso não, emitir um erro
@@ -64,6 +66,7 @@ public class Player : MonoBehaviour
                 dash = "Dash";
                 horizontal = "Horizontal";
                 vertical = "Vertical";
+                selectedCharacter = GameController.player1;
                 break;
             case SelectedPlayer.Player2:
                 jump = "Jump2";
@@ -71,6 +74,7 @@ public class Player : MonoBehaviour
                 dash = "Dash2";
                 horizontal = "Horizontal2";
                 vertical = "Vertical2";
+                selectedCharacter = GameController.player2;
                 break;
             case SelectedPlayer.Player3:
                 jump = "Jump3";
@@ -78,6 +82,7 @@ public class Player : MonoBehaviour
                 dash = "Dash3";
                 horizontal = "Horizontal3";
                 vertical = "Vertical3";
+                selectedCharacter = GameController.player3;
                 break;
             case SelectedPlayer.Player4:
                 jump = "Jump4";
@@ -85,6 +90,7 @@ public class Player : MonoBehaviour
                 dash = "Dash4";
                 horizontal = "Horizontal4";
                 vertical = "Vertical4";
+                selectedCharacter = GameController.player4;
                 break;
         }
     }
