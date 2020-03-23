@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public int dashForce = 900;
     public int dashMaxSpeed = 18;
     public float dashTime = 0.1f;
+
     
 
     private Rigidbody2D player_rg;
