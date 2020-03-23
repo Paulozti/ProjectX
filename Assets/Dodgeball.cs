@@ -19,13 +19,13 @@ public class Dodgeball : MonoBehaviour
     {
 
         Debug.Log("Batata");
-        Player2 player2 = hitInfo.GetComponent<Player2>();
-        if (player2 != null)
-        {
-            player2.TakeDamage(damage); 
-        
-        }
-        Destroy(gameObject);   
+        //Player2 player2 = hitInfo.GetComponent<Player2>();
+        //if (player2 != null)
+        //{
+        //    player2.TakeDamage(damage); 
+        //
+        //}
+        //Destroy(gameObject);   
     }
 }
     
