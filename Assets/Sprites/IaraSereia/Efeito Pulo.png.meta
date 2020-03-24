@@ -1,7 +1,22 @@
 fileFormatVersion: 2
 guid: b7fb7bf71d0b5ba48bc213b21d6fcb2a
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2631537440933037105
+    second: Efeito Pulo_0
+  - first:
+      213: 178169580443529684
+    second: Efeito Pulo_1
+  - first:
+      213: -773851715704411254
+    second: Efeito Pulo_2
+  - first:
+      213: -5422525165004614878
+    second: Efeito Pulo_3
+  - first:
+      213: -5921009567153211296
+    second: Efeito Pulo_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,9 +85,126 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Efeito Pulo_0
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 1060
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 125b80e86bd6e0744a04f7a586a9a723
+      internalID: 2631537440933037105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Efeito Pulo_1
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 1060
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e8686709f2222944ba3238ebc3f19ee
+      internalID: 178169580443529684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Efeito Pulo_2
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 560
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a617a91f3e7d1be4a8740116d1bbed8c
+      internalID: -773851715704411254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Efeito Pulo_3
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 560
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab274dcb0d20dc543bf905cb3089fa9d
+      internalID: -5422525165004614878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Efeito Pulo_4
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 60
+        width: 360
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db19f934dab704c48b945c277f018143
+      internalID: -5921009567153211296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

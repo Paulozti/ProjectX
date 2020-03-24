@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
         Player4
     };
     public SelectedPlayer selectedPlayer;
-
+    public CharacterAnimator animator;
     public delegate void ManaUse();
     public static event ManaUse OnManaUse;
 
@@ -38,8 +38,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         setControls();
-        CharacterAnimator characterAnimator = new CharacterAnimator();
-        chsaracterAnimator.SetCharacter(selectedCharacter); // erro proposital, receber o character
+        animator.SetCharacter(GameController.Characters.Iara); // passando ao animator qual o personagem selecionado pelo player
         player_rg = GetComponent<Rigidbody2D>();
         //ManaBar.OnManaFull += DashUnlock;
         GameController.checkNull(player_rg, "Player RigidBody", gameObject); //Verificando se foi possivel pegar o componente, caso não, emitir um erro
@@ -102,8 +101,17 @@ public class Player : MonoBehaviour
             float direction = Input.GetAxis(horizontal);
 
             //Invertendo impulso do player caso ele troque de direção
-            if (player_rg.velocity.x > 0 && direction < 0 || player_rg.velocity.x < 0 && direction > 0) 
+            if (player_rg.velocity.x > 0 && direction < 0 || player_rg.velocity.x < 0 && direction > 0)
+            {
                 player_rg.velocity = new Vector2(player_rg.velocity.x * -1, player_rg.velocity.y);
+            }
+            
+            //Invertendo sprite do animator
+            if((direction < 0 && animator.lookingRight) || (direction > 0 && !animator.lookingRight))
+            {
+                animator.Flip();
+            }
+            
 
             //Adicionando força de movimento
             player_rg.AddForce(new Vector2(direction, 0) * moveSpeed * Time.deltaTime);
@@ -117,17 +125,38 @@ public class Player : MonoBehaviour
 
             //Controle de velocidade maxima
 
-            if (player_rg.velocity.x > max) // Se o eixo X estiver acima da velocidade limite, a velocidade agora é a velocidade limite.
+            if (player_rg.velocity.x > max)// Se o eixo X estiver acima da velocidade limite, a velocidade agora é a velocidade limite.
+            { 
                 player_rg.velocity = new Vector2(max, player_rg.velocity.y);
-            if (player_rg.velocity.x < max * -1)// Se o eixo X estiver abaixo da velocidade limite * -1 (mesma velocidade só que negativa), a velocidade agora é a velocidade limite * -1.
+                // Ativando animação de mover pra direita
+                if (isGrounded)
+                    animator.OnMove();
+                
+            }
+            else if (player_rg.velocity.x < max * -1) // Se o eixo X estiver abaixo da velocidade limite * -1 (mesma velocidade só que negativa), a velocidade agora é a velocidade limite * -1.
+            {
                 player_rg.velocity = new Vector2(max * -1, player_rg.velocity.y);
+                // Ativando animação de mover pra esquerda
+                
+                if (isGrounded)
+                    animator.OnMove();
+            }
+            
             if (dashing)
             {
+                animator.OnDash();
                 if (player_rg.velocity.y > max)
+                {
                     player_rg.velocity = new Vector2(player_rg.velocity.x, max);
-                if (player_rg.velocity.y < max * -1)
+                }                    
+                else    if (player_rg.velocity.y < max * -1)
+                {
                     player_rg.velocity = new Vector2(player_rg.velocity.x, max * -1);
+                }
             }
+
+            
+
             
         }   
         else
@@ -139,13 +168,21 @@ public class Player : MonoBehaviour
                 {
                     player_rg.velocity = new Vector2(player_rg.velocity.x - stopForce, player_rg.velocity.y);
                     if (player_rg.velocity.x < 0) // caso a redução tenha sido o suficiente para inverter o eixo X, pare o personagem. Mantenha velocidade y.
+                    {
                         player_rg.velocity = new Vector2(0, player_rg.velocity.y);
+                        if(isGrounded)
+                            animator.OnIddle();
+                    }
                 }
                 else
                 {
                     player_rg.velocity = new Vector2(player_rg.velocity.x + stopForce, player_rg.velocity.y);
                     if (player_rg.velocity.x > 0)
+                    {
                         player_rg.velocity = new Vector2(0, player_rg.velocity.y);
+                        if(isGrounded)
+                            animator.OnIddle();
+                    }
                 }
             }
         }
@@ -196,6 +233,7 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("Ground"))
         {
             isGrounded = true;
+            animator.OnIddle();
             canDash = true;
         }
     }
@@ -204,6 +242,7 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("Ground"))
         {
             isGrounded = false;
+            animator.OnJump();
         }
     }
     

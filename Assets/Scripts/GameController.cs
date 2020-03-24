@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour
         Iara,
         Lobisomen,
         Curupira,
-        Mula
+        Saci
     };
 
     public static Characters player1, player2, player3, player4;
